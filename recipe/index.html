@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipedia</title>
+    <link rel="stylesheet" href="lib/styles/style.css">
+    <script src="lib/scripts/main.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-storage.js"></script>
+</head>
+<body>
+    <h1>Recipedia Recipe Submission</h1>
+    <h3>Brought to you by Dominick, Michael, and Yangfa.</h3>
+    <div>
+        <ul>
+            <li><a href="../index.html">Go Home</a></li>
+        </ul>
+    </div>
+    <hr>
+    <div class="recipe-form">
+        <form action="">
+            <div>
+                <h1>Header</h1>
+                <div>
+                    <label for="name">Recipe Name:</label>
+                    <input type="text" id="name">
+                </div>
+                <div>
+                    <label for="description">Recipe Description:</label>
+                    <input type="text" id="description">
+                </div>
+                <div>
+                    <label for="thumbnail">Recipe Thumbnail:</label>
+                    <input type="file" id="thumbnail" accept="image/png, image/jpeg">
+                </div>
+            </div>
+            <div>
+                <h1>Ingredients</h1>
+                <div class="ingredients-box">
+                    <div>
+                        <div>
+                            <label for="ingredient0">Ingredient:</label>
+                            <input type="text" id="ingredient0">
+                        </div>
+                        <div>
+                            <label for="quantity0">Ingredient Quantity:</label>
+                            <input type="text" id="quantity0">
+                        </div>
+                        <button>Remove Ingredient</button>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="ingredient1">Ingredient:</label>
+                            <input type="text" id="ingredient1">
+                        </div>
+                        <div>
+                            <label for="quantity1">Ingredient Quantity:</label>
+                            <input type="text" id="quantity1">
+                        </div>
+                        <button>Remove Ingredient</button>
+                    </div>
+                </div>
+                <button id="ingredientBtn">Add more ingredients</button>
+            </div>
+            <div>
+                <h1>Instructions</h1>
+                <div class="instructions-box">
+                    <div>
+                        <div>
+                            <label for="step0">Step 1</label>
+                            <input type="text" id="step0">
+                        </div>
+                        <div>
+                            <label for="pic0">Step Image:</label>
+                            <input type="file" id="pic0" accept="image/png, image/jpeg">
+                        </div>
+                        <button>Remove Step</button>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="step1">Step 2</label>
+                            <input type="text" id="step1">
+                        </div>
+                        <div>
+                            <label for="pic1">Step Image:</label>
+                            <input type="file" id="pic1" accept="image/png, image/jpeg">
+                        </div>
+                        <button>Remove Step</button>
+                    </div>
+                </div>
+                <button id="instructionBtn">Add more steps.</button>
+            </div>
+            <div>
+                <h1>Video</h1>
+                <div>
+                    <label for="video">Upload a Video for the recipe:</label>
+                    <input type="file" id="video" accept="video/*">
+                </div>
+            </div>
+            <button id="submit">Submit Recipe</button>
+        </form>
+    </div>
+    <div class="login">
+        <h1>Not Logged In</h1>
+        <p>You cannot submit a recipe without logging in.</p>
+        <a href="../login/index.html"></a>
+    </div>
+    <div class="error-box hidden">
+        <div class="error-content">
+            <h1>Error</h1>
+            <p class="error-msg">
+                Cannot Process.
+            </p>
+            <div>Ok</div>
+        </div>
+    </div>
+    <img src="" alt="">
+</body>
+</html>

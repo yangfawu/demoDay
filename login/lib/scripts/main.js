@@ -32,19 +32,24 @@ document.querySelector("form button").onclick = function() {
         document.querySelector(".error-msg").innerHTML = msg;
     };
 
-    var inputs = Array.from(document.querySelectorAll("form div input")).map(field => field.value.trim());
+    var fields = document.querySelectorAll("form div input");
+    var inputs = Array.from(fields).map(field => field.value.trim());
     if (inputs.filter(input => input.length == 0).length > 0) 
         errorAlert("Not all the input fields are filled.");
     else {
         // if all fields are filled
         auth.signInWithEmailAndPassword(inputs[0], inputs[1])
         .catch(err => errorAlert(err.message));
+
+        fields.forEach(field => {
+            field.value = "";
+        });
     }
 }
 
 
 // Logged In Logistics
-firebase.auth().onAuthStateChanged(user => {
+auth.onAuthStateChanged(user => {
     if (user) {
         // User is signed in.
         console.log(user);

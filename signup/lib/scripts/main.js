@@ -33,7 +33,8 @@ document.querySelector("form button").onclick = function() {
         document.querySelector(".error-msg").innerHTML = msg;
     };
 
-    var inputs = Array.from(document.querySelectorAll("form div input")).map(field => field.value.trim());
+    var fields = document.querySelectorAll("form div input");
+    var inputs = Array.from(fields).map(field => field.value.trim());
     if (inputs.filter(input => input.length == 0).length > 0) 
         errorAlert("Not all the input fields are filled.");
     else {
@@ -53,6 +54,9 @@ document.querySelector("form button").onclick = function() {
                 "ratings": { "total": 0 }
             });
 
+            fields.forEach(field => {
+                field.value = "";
+            });
             return user;
         })
         .then(user => {
