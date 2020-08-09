@@ -53,15 +53,16 @@ function initSection(id) {
     var box = document.querySelector(`.${id}s-box`);
     box.innerHTML = "";
 
-    function addInput() {
+    function addInput(id) {
         if (document.querySelectorAll(`.${id}s-box div p`).length > 0) box.innerHTML = "";
-        box.appendChild(newIngredientInput());
+        var input = (id == "ingredient") ? newIngredientInput() : newStepInput();
+        box.appendChild(input);
     }
     document.getElementById(`${id}Btn`).onclick = function() {
         event.preventDefault();
-        addInput();
+        addInput(id);
     };
-    addInput();
+    addInput(id);
 }
 
 function newInput(label, type, ...add) {
