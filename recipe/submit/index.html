@@ -16,13 +16,13 @@
     <h3>Brought to you by Dominick, Michael, and Yangfa.</h3>
     <div>
         <ul>
-            <li><a href="../index.html">Go Home</a></li>
+            <li><a href="../../index.html">Go Home</a></li>
         </ul>
     </div>
     <hr>
     <div class="recipe-form">
         <form action="">
-            <div>
+            <div class="form-header">
                 <h1>Header</h1>
                 <div>
                     <label for="name">Recipe Name:</label>
@@ -37,63 +37,17 @@
                     <input type="file" id="thumbnail" accept="image/png, image/jpeg">
                 </div>
             </div>
-            <div>
+            <div class="form-ingredients">
                 <h1>Ingredients</h1>
-                <div class="ingredients-box">
-                    <div>
-                        <div>
-                            <label for="ingredient0">Ingredient:</label>
-                            <input type="text" id="ingredient0">
-                        </div>
-                        <div>
-                            <label for="quantity0">Ingredient Quantity:</label>
-                            <input type="text" id="quantity0">
-                        </div>
-                        <button>Remove Ingredient</button>
-                    </div>
-                    <div>
-                        <div>
-                            <label for="ingredient1">Ingredient:</label>
-                            <input type="text" id="ingredient1">
-                        </div>
-                        <div>
-                            <label for="quantity1">Ingredient Quantity:</label>
-                            <input type="text" id="quantity1">
-                        </div>
-                        <button>Remove Ingredient</button>
-                    </div>
-                </div>
+                <div class="ingredients-box"></div>
                 <button id="ingredientBtn">Add more ingredients</button>
             </div>
-            <div>
+            <div class="form-instructions">
                 <h1>Instructions</h1>
-                <div class="instructions-box">
-                    <div>
-                        <div>
-                            <label for="step0">Step 1</label>
-                            <input type="text" id="step0">
-                        </div>
-                        <div>
-                            <label for="pic0">Step Image:</label>
-                            <input type="file" id="pic0" accept="image/png, image/jpeg">
-                        </div>
-                        <button>Remove Step</button>
-                    </div>
-                    <div>
-                        <div>
-                            <label for="step1">Step 2</label>
-                            <input type="text" id="step1">
-                        </div>
-                        <div>
-                            <label for="pic1">Step Image:</label>
-                            <input type="file" id="pic1" accept="image/png, image/jpeg">
-                        </div>
-                        <button>Remove Step</button>
-                    </div>
-                </div>
+                <div class="instructions-box"></div>
                 <button id="instructionBtn">Add more steps.</button>
             </div>
-            <div>
+            <div class="form-video">
                 <h1>Video</h1>
                 <div>
                     <label for="video">Upload a Video for the recipe:</label>
@@ -103,10 +57,14 @@
             <button id="submit">Submit Recipe</button>
         </form>
     </div>
+    <div class="status">
+        <h1>Recipe Submission Progress</h1>
+        <p>Uploading...</p>
+    </div>
     <div class="login">
         <h1>Not Logged In</h1>
         <p>You cannot submit a recipe without logging in.</p>
-        <a href="../login/index.html"></a>
+        <a href="../../login/index.html"></a>
     </div>
     <div class="error-box hidden">
         <div class="error-content">
@@ -117,6 +75,5 @@
             <div>Ok</div>
         </div>
     </div>
-    <img src="" alt="">
 </body>
 </html>
