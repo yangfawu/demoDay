@@ -183,7 +183,7 @@ function loadForm() {
                             PROGRESS.log(3, "f");
                         } else PROGRESS.log(3, "c");
                     });
-                    storage.ref().child(`videos/${videoFile.name}`).put(videoFile)
+                    storage.ref().child(`videos/${recipeId}/${videoFile.name}`).put(videoFile)
                     .then(snapshot => {
                         console.log(snapshot);
                         PROGRESS.log(4, "c");
