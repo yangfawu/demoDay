@@ -104,14 +104,20 @@ function loadForm() {
                     document.querySelector(".status p").innerHTML = "Upload Failed.";
                     document.querySelector(".recipe-form").style.display = "block";
                     document.querySelector(".status").style.display = "none";
+                    console.log(PROGRESS);
                     errorAlert("Recipe Upload Failed. Please try again");
                 } else if (this.value.filter(prog => prog == "p").length < 1) {
                     // if all values are "c", then upload is complete
                     document.querySelector(".status p").innerHTML = "Upload Complete!";
+
+                    var a = document.createElement("a");
+                    a.innerHTML = "Submit Another Recipe";
+                    a.setAttribute("href", "index.html");
+                    document.querySelector(".status").appendChild(a);
                 }
             }
         };
-        for (var i=0; i<(8+stepFilesInputs.length+(ingredientsInputs.length/2)+stepTextsInputs.length); i++)
+        for (var i=0; i<(9+stepFilesInputs.length+(ingredientsInputs.length/2)+stepTextsInputs.length); i++)
             PROGRESS.value.push("p");
 
         var recipeId = database.ref("recipes/").push().key;
@@ -181,7 +187,7 @@ function loadForm() {
                     .then(snapshot => {
                         console.log(snapshot);
                         PROGRESS.log(4, "c");
-                        uploadFiles(stepFilesInputs, 0);
+                        uploadFiles([...stepFilesInputs, thumbnail], 0);
                     })
                     .catch(err => {
                         if (err) {
@@ -193,12 +199,12 @@ function loadForm() {
                     PROGRESS.log(2, "c");
                     PROGRESS.log(3, "c");
                     PROGRESS.log(4, "c");
-                    uploadFiles(stepFilesInputs, 0);
+                    uploadFiles([...stepFilesInputs, thumbnail], 0);
                 }
 
                 function uploadFiles(arr, idx) {
                     if (arr[idx]) {
-                        storage.ref().child(`images/${arr[idx].name}`).put(arr[idx])
+                        storage.ref().child(`images/${recipeId}/${arr[idx].name}`).put(arr[idx])
                         .then(snapshot => {
                             PROGRESS.log(5+idx, "c");
                             if ((idx+1) < arr.length) uploadFiles(arr, idx + 1);
@@ -217,20 +223,20 @@ function loadForm() {
                 database.ref(`recipes/${recipeId}/reviews/community/raters`).push(placeholder, err => {
                     if (err) {
                         errorAlert(err);
-                        PROGRESS.log(5+stepFilesInputs.length, "f");
-                    } else PROGRESS.log(5+stepFilesInputs.length, "c");
+                        PROGRESS.log(6+stepFilesInputs.length, "f");
+                    } else PROGRESS.log(6+stepFilesInputs.length, "c");
                 });
                 database.ref(`recipes/${recipeId}/reviews/photo/raters`).push(placeholder, err => {
                     if (err) {
                         errorAlert(err);
-                        PROGRESS.log(6+stepFilesInputs.length, "f");
-                    } else PROGRESS.log(6+stepFilesInputs.length, "c");
+                        PROGRESS.log(7+stepFilesInputs.length, "f");
+                    } else PROGRESS.log(7+stepFilesInputs.length, "c");
                 });
                 database.ref(`recipes/${recipeId}/videos/community/users`).push(placeholder, err => {
                     if (err) {
                         errorAlert(err);
-                        PROGRESS.log(7+stepFilesInputs.length, "f");
-                    } else PROGRESS.log(7+stepFilesInputs.length, "c");
+                        PROGRESS.log(8+stepFilesInputs.length, "f");
+                    } else PROGRESS.log(8+stepFilesInputs.length, "c");
                 });
 
 
@@ -246,7 +252,7 @@ function loadForm() {
                                 PROGRESS.log((idx/2) + offset, "f");
                             } else PROGRESS.log((idx/2) + offset, "c");
                         });
-                    })(i*2, 8+stepFilesInputs.length);
+                    })(i*2, 9+stepFilesInputs.length);
                 }
                 
                 // upload instructions
@@ -262,7 +268,7 @@ function loadForm() {
                                 PROGRESS.log(idx + offset, "f");
                             } else PROGRESS.log(idx + offset, "c");
                         });
-                    })(j, 8+stepFilesInputs.length+(ingredientsInputs.length/2));
+                    })(j, 9+stepFilesInputs.length+(ingredientsInputs.length/2));
                 }
             }
         });
