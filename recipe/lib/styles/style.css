@@ -9,6 +9,9 @@ body {
 .recheadimg{
     height: 85px;
 }
+.lookup{
+    font-family: Josefin Sans;
+}
 .error-box {
     position: fixed;
     top: 0;
