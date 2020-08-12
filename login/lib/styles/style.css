@@ -12,6 +12,10 @@
     
     color: #000000;
 }
+
+.loginheadimg{
+    height:78px
+}
 .backsign{
 position: absolute;
 top: 30.55%;
