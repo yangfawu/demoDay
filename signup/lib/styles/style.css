@@ -1,6 +1,32 @@
 body {
     margin: 0;
 }
+.home{
+    position: absolute;
+    top: 18.55%;
+    bottom: 73.77%;
+    
+    font-family: Josefin Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 24px;
+    
+    color: #000000;
+}
+.backsign{
+position: absolute;
+top: 23.55%;
+bottom: 73.77%;
+
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 24px;
+
+color: #000000;
+}
 
 .error-box {
     position: fixed;
@@ -42,4 +68,111 @@ body {
 
 .success {
     display: none;
+}
+.signpagehead{
+position: absolute;
+left: -0.72%;
+right: -0.72%;
+top: -0.89%;
+bottom: 83.15%;
+
+background: #5271FF;
+}
+.firstname{
+top: 24.55%;
+left: 31.88%;
+bottom: 73.77%;
+right: 30.43%;
+position:absolute;
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 24px;
+}
+#firstname{
+    position:absolute;
+    top:30%;
+    bottom:70%;
+    left:25%;
+    height: 30px;
+    width:250px;
+    background: #FFFFFF;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+.lastname{
+top:40%;
+left:34%;
+position:absolute;
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 24px;
+}
+#lastname{
+    position:absolute;
+    top:45%;
+    left:25%;
+    height: 30px;
+    width:250px;
+    background: #FFFFFF;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+.upemail{
+top:55%;
+left:38%;
+position:absolute;
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 24px;
+
+}
+#email{
+top:60%;
+position:absolute;
+left:25%;
+height: 30px;
+width:250px;
+background: #FFFFFF;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 10px;
+}
+.uppassword{
+top:70%;
+left:35%;
+position:absolute;
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 24px;
+}
+#password{
+top:75%;
+position:absolute;
+left:25%;
+height: 30px;
+width:250px;
+background: #FFFFFF;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 10px;
+}
+.signupbut{
+position:absolute;
+top:83%;
+left:35%;
+
 }

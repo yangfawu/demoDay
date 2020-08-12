@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipedia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="lib/styles/style.css">
     <script src="lib/scripts/main.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
@@ -11,21 +12,24 @@
     <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
 </head>
 <body>
-    <h1>Recipedia Home Page</h1>
-    <h3>Brought to you by Dominick, Michael, and Yangfa.</h3>
+    <div class="header"> <img src="assets/Recipedia(3).png"></div>
+    <div class="welcome"><p class="feel">For when you're feeling</p><p id="change">Hunrgy</p></div>
+    <h3 class="brought">Brought to you by Dominick, Michael, and Yangfa.</h3>
     <div>
-        <ul>
-            <li><a href="signup/index.html">Go To Sign Up</a></li>
-            <li><a href="login/index.html">Go To Log In</a></li>
-        </ul>
+        <p class="getcook">Lets get cooking!</p>
+        <a href="signup/index.html" class="up">Go To Sign Up</a>
+        <a href="login/index.html" class="in">Go To Log In</a>
+        <p class='dont'>Dont have an account?</p>
+        <p class='already'>Already have an account?</p>
     </div>
+    <div class="goaldiv">
+        <p class='goalhead'>Our Goal</p> 
+        <p class="goalstatement">At Recipedia, we believe in empowering all people with the greatest power of all, making their own meals. The most impactful thing our company can do is to educate people on how to eat healthy and be in total control of what goes in their bodies. </p>
+    </div>
+
     <hr>
     <div>
-        <h1>If u r logged in, you can go to these pages:</h1>
-        <ul>
-            <li><a href="recipe/index.html">Go Look For a Recipe</a></li>
-            <li><a href="recipe/submit/index.html">Go Upload a Recipe</a></li>
-        </ul>
+    <a href="recipe/index.html" class='lookrec'>Go Look For a Recipe</a>
     </div>
 </body>
 </html>

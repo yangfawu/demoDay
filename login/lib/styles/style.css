@@ -1,5 +1,36 @@
-body {
-    margin: 0;
+
+.home{
+    position: absolute;
+    top: 26.55%;
+    bottom: 73.77%;
+    
+    font-family: Josefin Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 24px;
+    
+    color: #000000;
+}
+.backsign{
+position: absolute;
+top: 30.55%;
+bottom: 73.77%;
+
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 24px;
+
+color: #000000;
+}
+.header {
+    padding: 60px;
+    height: 3vh; 
+    text-align: center;
+    background: #5271FF;
+    text-align: center;
 }
 
 .error-box {
@@ -15,7 +46,6 @@ body {
 }
 
 .error-content {
-    background-color: white;
     margin: 10px;
     padding: 10px;
     width: calc(600px - 20px);
@@ -43,3 +73,109 @@ body {
 .success {
     display: none;
 }
+
+.startcook {
+    position: absolute;
+    left: 34.64%;
+    right: 30.19%;
+    top:80%;
+    font-family: Josefin Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 24px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+    
+    color: #5271FF;
+    
+    opacity: 1.0;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.email {
+/* Email */
+
+position: absolute;
+left: 55.19%;
+right: 10.19%;
+top: 27%;
+
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: bold;
+font-size: 24px;
+line-height: 24px;
+/* identical to box height */
+
+color: #000000;
+
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#email {
+    position: absolute;
+    left: 45.19%;
+    right: 1.19%;
+    height: 30px;
+    width:250px;
+    background: #FFFFFF;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+/* identical to word height */
+}
+
+.password {
+/* Password */
+
+position: absolute;
+left: 55.19%;
+right: 10.19%;
+top:45%;
+
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: bold;
+font-size: 24px;
+line-height: 24px;
+/* identical to box height */
+
+color: #000000;
+
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#password {
+    /* Password */
+height: 30px;
+width:250px;
+position: absolute;
+left: 45.19%;
+right: 1.19%;
+top:55%;
+
+background: #FFFFFF;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+/* identical to box height */
+
+color: #000000;
+
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.loginbut{
+
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 24px;
+display: flex;
+align-items: center;
+}
+

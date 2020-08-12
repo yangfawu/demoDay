@@ -1,0 +1,217 @@
+body{
+    background-color: #5271FF;
+}
+.header{
+    position: absolute;
+    left: 30.68%;
+    right: 30.92%;
+    top: 1.19%;
+    bottom: 88.66%;
+}
+.welcome{
+    position: absolute;
+    left: 0%;
+    right: -1.93%;
+    top: 10%;
+    bottom: 62.83%;
+    background: #494949;
+}
+.feel{
+position: absolute;
+left: 10.63%;
+right: 8.7%;
+top: -5%;
+bottom: 79.48%;
+font-family: 'Josefin Sans', sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 32px;
+line-height: 32px;
+color: #FFFFFF;
+text-align: center;
+}
+#change{
+position: absolute;
+left: 33.33%;
+right: 37.44%;
+bottom: 64.89%;
+top: 45%;
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 32px;
+text-align: center;
+line-height: 32px;
+
+color: #3492EB;
+}
+.getcook{
+position: absolute;
+left: 10.74%;
+right: 10.63%;
+top: 34.69%;
+bottom: 65.96%;
+
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: bold;
+font-size: 30px;
+line-height: 30px;
+text-align: center;
+color: #FFFFFF;
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.up{
+position: absolute;
+left:30%;
+right:30%;
+top: 56%;
+bottom: 44%;
+
+text-align: center;
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 24px;
+text-decoration-line: underline;
+
+color: #FFFFFF;
+}
+.lookrec{
+position: absolute;
+left: 10px;
+top: 34.69%;
+bottom: 65.96%;
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 24px;
+text-decoration-line: underline;
+color: #f6f6f6;
+}
+    
+.already{
+position: absolute;
+left: 15.94%;
+right: 16.18%;
+top: 56.07%;
+bottom: 58.26%;
+
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 24px;
+text-align: center;
+color: #FFFFFF;
+
+opacity: 0.5;
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.dont{
+position: absolute;
+left: 15.94%;
+right: 16.18%;
+top: 48.07%;
+bottom: 58.26%;
+
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 24px;
+text-align: center;
+color: #FFFFFF;
+
+opacity: 0.5;
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.in{
+text-align: center;    
+position: absolute;
+left: 30.55%;
+right: 30.55%;
+top: 64.63%;
+bottom: .7%;
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 24px;
+text-decoration-line: underline;
+color: #FFFFFF;
+
+}
+.goaldiv{
+position: absolute;
+left: 0%;
+right: -1.93%;
+top: 70.34%;
+background: #F6F6F6; 
+}
+.goalhead{
+position: absolute;
+margin:10px;
+width: 114px;
+height: 10px;
+left:45%;
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: bold;
+font-size: 24px;
+line-height: 24px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #3492EB;
+
+}
+
+.goalstatement{
+top:100px;
+width: 90%;
+height: 141px;
+
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 26px;
+line-height: 26px;
+
+color: #3492EB;
+}
+.brought{
+    margin-top: 20px;
+    position: absolute;
+    top: 450px;
+    bottom: 10px;
+    color: #F6F6F6;
+    font-family: Josefin Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 40px;
+    
+
+}
+.lookrec{
+position: absolute;
+left: 40%;
+right: 20%;
+top: 47%;
+bottom: 60.92%;
+text-align: center;
+font-family: Josefin Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 24px;
+text-decoration-line: underline;
+color: #f6f6f6;
+}
+
+
