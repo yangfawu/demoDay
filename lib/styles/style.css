@@ -278,6 +278,10 @@ body {
     .AUTH-modal-form-FORM {
         width: 100%;
     }
+
+    .AUTH-modal-form-results {
+        width: 100%;
+    }
 }
 
 @media (max-width: 930px) {
@@ -361,7 +365,7 @@ body {
         font-size: 16px;
     }
 
-    .info-container p, .AUTH-modal-form-FORM button, .AUTH-modal-form-results button,.error-content button, .AUTH-modal-form-FORM div input {
+    .info-container p, .AUTH-modal-form-results, .AUTH-modal-form-FORM button, .AUTH-modal-form-results button,.error-content button, .AUTH-modal-form-FORM div input {
         font-size: 14px;
     }
 
@@ -415,7 +419,7 @@ body {
         font-size: 18px;
     }
 
-    .info-container p, .AUTH-modal-form-FORM button, .AUTH-modal-form-results button,.error-content button, .AUTH-modal-form-FORM div input {
+    .info-container p, .AUTH-modal-form-results, .AUTH-modal-form-FORM button, .AUTH-modal-form-results button,.error-content button, .AUTH-modal-form-FORM div input {
         font-size: 16px;
     }
     
@@ -470,7 +474,7 @@ body {
         font-size: 14px;
     }
 
-    .info-container p, .AUTH-modal-form-FORM button, .AUTH-modal-form-results button,.error-content button, .AUTH-modal-form-FORM div input {
+    .info-container p, .AUTH-modal-form-results, .AUTH-modal-form-FORM button, .AUTH-modal-form-results button,.error-content button, .AUTH-modal-form-FORM div input {
         font-size: 12px;
     }
 
