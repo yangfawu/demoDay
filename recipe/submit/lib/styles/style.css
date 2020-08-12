@@ -1,5 +1,7 @@
 body {
     margin: 0;
+    background-color: #B8F2E6;
+    font-family: 'Baloo 2', cursive;
 }
 
 .error-box {
@@ -11,7 +13,7 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     place-items: center;
     display: none;
-    z-index: 99;
+    z-index: 105;
 }
 
 .error-content {
@@ -19,31 +21,462 @@ body {
     margin: 10px;
     padding: 10px;
     width: calc(600px - 20px);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.error-content h1 {
+    margin: 0;
+    font-weight: normal;
+}
+
+.error-content p {
+    text-align: left;
+    margin: 0;
 }
 
 @media (max-width: 620px) {
     .error-content {
-        width: calc(100% - 20px);
+        width: calc(100% - 40px);
     }
 }
 
-.error-content div {
-    background-color: aquamarine;
-    width: fit-content;
-    padding: 10px;
-    margin: auto;
-    cursor: pointer;
-    user-select: none;
+.error-content button {
+    font-family: 'Baloo 2', cursive;
+    font-size: 16px;
+    border-radius: 10px;
+    padding: 5px;
+    letter-spacing: 0.3ch;
+    border: none;
+    background-color: #FAF3DD;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
-.error-content div:active {
-    background-color: blue;
+.error-content button:hover {
+    background-color: #ffdcd9;
+}
+
+.error-content button:active {
+    background-color: darksalmon;
+}
+
+
+.status {
+    display: none;
+}
+
+.head {
+    background-color: #AED9E0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-shadow: 5px 5px 10px #4baaba;
+}
+
+.head a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.head img {
+    width: 75px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.head h1 {
+    font-weight: normal;
+    font-family: 'Marck Script', cursive;
+    font-size: 50px;
+    margin: 0;
+    letter-spacing: 0.2ch;
+}
+
+.sandbox {
+    padding: 25px 70px 30px 70px;
+    width: 700px;
+    background-color: #FAF3DD;
+    margin: 50px auto;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px #4baaba;
+}
+
+.sandbox h1 {
+    margin: 0px 0px 5px 0px;
+    font-weight: normal;
+    text-align: center;
+    font-size: 40px;
+}
+
+.sandbox p {
+    margin: 0;
+    font-size: 20px;
+    text-align: left;
+}
+
+.recipe-form {
+    width: 550px;
+    margin: auto;
+}
+
+.recipe-form div label {
+    text-align: left;
+    font-size: 20px;
 }
 
 .login {
     display: none;
+    text-align: center;
 }
 
-.status {
-    display: none;
+.login p {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.login a {
+    text-decoration: none;
+    padding: 5px 10px;
+    font-size: 20px;
+    background-color: #B8F2E6;
+    border-radius: 5px;
+}
+
+.login a:hover {
+    background-color: #d9f8f2;
+}
+
+.form-header, .form-ingredients, .form-instructions {
+    margin-bottom: 20px;
+}
+
+.foot {
+    text-align: center;
+    font-size: small;
+    background-color: #AED9E0;
+}
+
+.form {
+    text-align: center;
+}
+
+.form-header div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.ingredients-box-INPUT-BOX-text {
+    flex: 2;
+    margin-right: 10px;
+}
+
+.ingredients-box-INPUT-BOX-quantity, .recipe-form-STEP-INPUT-BOX-text {
+    flex: 1;
+    margin-right: 10px;
+}
+
+input[type = text] {
+    text-align: left;
+    font-family: 'Baloo 2', cursive;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+}
+
+.ingredients-box-INPUT-BOX, .recipe-form-STEP-INPUT-BOX {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    animation: fadeIn 0.6s 1 ease-out;
+}
+
+.ingredients-box-INPUT-BOX div, .recipe-form-STEP-INPUT-BOX div {
+    display: flex;
+    flex-direction: column;
+}
+
+.ingredients-box-INPUT-BOX-button, .recipe-form-STEP-INPUT-BOX-button {
+    height: 30px;
+    width: 30px;
+    background-image: url("../../assets/minus_sign.png");
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.ingredients-box-INPUT-BOX-button:hover, .recipe-form-STEP-INPUT-BOX-button:hover {
+    background-color: #B8F2E6;
+}
+
+#ingredientBtn, #instructionBtn {
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border: 5px dashed black;
+}
+
+#ingredientBtn:hover, #instructionBtn:hover {
+    background-color: #B8F2E6;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#submit {
+    font-family: 'Baloo 2', cursive;
+    padding: 5px 10px;
+    background-color: #B8F2E6;
+    outline: none !important;
+    border: none !important;
+    font-size: 30px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+#submit:hover {
+    background-color: #d9f8f2;
+}
+
+.status p {
+    text-align: center;
+}
+
+.status section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+
+.status section a {
+    font-family: 'Baloo 2', cursive;
+    padding: 5px 10px;
+    background-color: #B8F2E6;
+    outline: none !important;
+    border: none !important;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.status section a:hover {
+    background-color: #d9f8f2;
+}
+
+@media (max-width: 930px) {
+    .sandbox {
+        width: calc(100% - 180px);
+        padding: 25px 30px 30px 30px;
+        margin: 50px 60px;
+    }
+}
+
+@media (max-width: 800px) {
+    .sandbox {
+        width: calc(100% - 180px);
+        padding: 25px 30px 30px 30px;
+        margin: 50px 60px;
+    }
+
+    .sandbox h1 {
+        margin: 0px 0px 5px 0px;
+        font-weight: normal;
+        text-align: center;
+        font-size: 36px;
+    }
+    
+    .sandbox p {
+        margin: 0;
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .recipe-form div label {
+        font-size: 16px;
+    }
+
+    input[type = text] {
+        font-size: 14px;
+    }
+
+    #ingredientBtn, #instructionBtn {
+        font-size: 16px;
+    }
+
+    #submit {
+        font-size: 25px;
+    }
+
+    .status section a {
+        font-size: 14px;
+    }
+
+    .ingredients-box-INPUT-BOX-button, .recipe-form-STEP-INPUT-BOX-button {
+        height: 22px;
+        width: 22px;
+    }
+}
+
+@media (max-width: 730px) {
+    .recipe-form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 650px) {
+    .sandbox h1 {
+        font-size: 32px;
+    }
+    
+    .sandbox p {
+        margin: 0;
+        font-size: 14px;
+        text-align: left;
+    }
+
+    .recipe-form div label {
+        font-size: 14px;
+    }
+
+    input[type = text] {
+        font-size: 12px;
+    }
+
+    #ingredientBtn, #instructionBtn {
+        font-size: 14px;
+    }
+
+    #submit {
+        font-size: 20px;
+    }
+
+    .status section a {
+        font-size: 12px;
+    }
+
+    .ingredients-box-INPUT-BOX-button, .recipe-form-STEP-INPUT-BOX-button {
+        height: 18px;
+        width: 18px;
+    }
+
+    .sandbox {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 625px) {
+    .sandbox {
+        width: calc(100% - 80px);
+        margin: 50px 20px;
+    }
+}
+
+@media (max-width: 580px) {
+    .head img {
+        width: 50px;
+        height: auto;
+    }
+    
+    .head h1 {
+        font-size: 40px;
+    }
+
+    #ingredientBtn, #instructionBtn {
+        padding: 5px;
+    }
+}
+
+@media (max-width: 440px) {
+    .ingredients-box-INPUT-BOX {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .ingredients-box-INPUT-BOX-text {
+        margin-right: 0px;
+        width: 100%;
+        flex: none;
+    }
+
+    .sandbox h1 {
+        font-size: 24px;
+    }
+
+    .sandbox p {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 380px) {
+    .head img {
+        width: 35px;
+        height: auto;
+    }
+    
+    .head h1 {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 330px) {
+    #submit {
+        font-size: 12px;
+    }
+
+    .status section {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .status section a {
+        width: 80%
+    }
+
+    .status section a:nth-child(1) {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 290px) {
+    #submit {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 672px) {
+    .error-content button {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 625px) {
+    .error-content button {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .error-content button {
+        font-size: 12px;
+    }
 }

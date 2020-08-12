@@ -11,69 +11,77 @@
     <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-storage.js"></script>
     <link rel="shortcut icon" href="assets/recipedia_logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Recipedia Recipe Submission</h1>
-    <h3>Brought to you by Dominick, Michael, and Yangfa.</h3>
-    <div>
-        <ul>
-            <li><a href="../../index.html">Go Home</a></li>
-        </ul>
-    </div>
-    <hr>
-    <div class="recipe-form">
-        <form action="">
-            <div class="form-header">
-                <h1>Header</h1>
-                <div>
-                    <label for="name">Recipe Name:</label>
-                    <input type="text" id="name">
+    <section class="head">
+        <a href="../../index.html">
+            <img src="assets/recipedia_logo.png" alt="logo">
+            <h1>Recipedia</h1>
+        </a>
+    </section>
+    <section class="sandbox">
+        <h1>Submit A Recipe</h1>
+        <p>
+            Welcome to Recipedia's intuitive recipe submission page! This is where Recipedia users get to submit their own recipes to our database and share them with others in the community! All you have to do is to fill in the necessary input fields and add pictures/videos wherever necessary. When you are finished, just submit the recipe details and Recipedia will take care of the rest!
+        </p>
+    </section>
+    <section class="sandbox">
+        <div class="recipe-form">
+            <form action="">
+                <div class="form-header">
+                    <h1>Header</h1>
+                    <div>
+                        <label for="name">Recipe Name</label>
+                        <input type="text" id="name">
+                    </div>
+                    <div>
+                        <label for="description">Recipe Description</label>
+                        <input type="text" id="description">
+                    </div>
+                    <div>
+                        <label for="thumbnail">Recipe Thumbnail</label>
+                        <input type="file" id="thumbnail" accept="image/png, image/jpeg">
+                    </div> 
                 </div>
-                <div>
-                    <label for="description">Recipe Description:</label>
-                    <input type="text" id="description">
+                <div class="form-ingredients">
+                    <h1>Ingredients</h1>
+                    <div class="ingredients-box"></div>
+                    <div id="ingredientBtn">Add an Ingredient</div>
                 </div>
-                <div>
-                    <label for="thumbnail">Recipe Thumbnail:</label>
-                    <input type="file" id="thumbnail" accept="image/png, image/jpeg">
+                <div class="form-instructions">
+                    <h1>Instructions</h1>
+                    <div class="instructions-box"></div>
+                    <div id="instructionBtn">Add a Step</div>
                 </div>
-            </div>
-            <div class="form-ingredients">
-                <h1>Ingredients</h1>
-                <div class="ingredients-box"></div>
-                <button id="ingredientBtn">Add more ingredients</button>
-            </div>
-            <div class="form-instructions">
-                <h1>Instructions</h1>
-                <div class="instructions-box"></div>
-                <button id="instructionBtn">Add more steps.</button>
-            </div>
-            <div class="form-video">
-                <h1>Video</h1>
-                <div>
-                    <label for="video">Upload a Video for the recipe:</label>
-                    <input type="file" id="video" accept="video/*">
-                </div>
-            </div>
-            <button id="submit">Submit Recipe</button>
-        </form>
-    </div>
-    <div class="status">
-        <h1>Recipe Submission Progress</h1>
-        <p>Uploading...</p>
-    </div>
-    <div class="login">
-        <h1>Not Logged In</h1>
-        <p>You cannot submit a recipe without logging in. (Security Reasons)</p>
-        <a href="../../login/index.html">Go Login</a>
-    </div>
+                <button id="submit">Submit Recipe</button>
+            </form>
+        </div>
+        <div class="status">
+            <h1>Recipe Submission Progress</h1>
+            <p>Uploading...</p>
+            <section>
+                <a href="index.html">Submit Another Recipe</a>
+                <a href="../../index.html">Go Home</a>
+            </section>
+        </div>
+        <div class="login">
+            <h1>Not Logged In</h1>
+            <p>You cannot submit a recipe without logging in. (Security Reasons)</p>
+            <a href="../../index.html">Go Login</a>
+        </div>
+    </section>
+    <section class="foot">
+        &copy; Copyright 2020, Recipedia. All rights reserved.
+    </section>
     <div class="error-box hidden">
         <div class="error-content">
             <h1>Error</h1>
             <p class="error-msg">
                 Cannot Process.
             </p>
-            <div>Ok</div>
+            <button>Ok</button>
         </div>
     </div>
 </body>

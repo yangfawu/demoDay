@@ -18,7 +18,7 @@ window.onclick = function() {
     if (event.target == errorBox) errorBox.style.display = "none";
 };
 
-document.querySelector(".error-content div").onclick = function() {
+document.querySelector(".error-content button").onclick = function() {
     document.querySelector(".error-box").style.display = "none";
 }
 
@@ -81,11 +81,6 @@ function loadForm() {
         // get files from input[type = file] in step section is filled
         var thumbnail = document.querySelector(".form-header div input[type = file]").files[0];
 
-        var stepFiles = document.querySelectorAll(".instructions-box div input[type = file]");
-        var stepFilesInputs = Array.from(stepFiles).map(field => field.files[0]);
-
-        var videoFile = document.querySelector(".form-video div input[type = file]").files[0];
-
         // uploading
         var PROGRESS = {
             value: [],
@@ -101,23 +96,15 @@ function loadForm() {
                     })();
 
                     // say upload failed
-                    document.querySelector(".status p").innerHTML = "Upload Failed.";
-                    document.querySelector(".recipe-form").style.display = "block";
-                    document.querySelector(".status").style.display = "none";
-                    console.log(PROGRESS);
-                    errorAlert("Recipe Upload Failed. Please try again");
+                    errorAlert("Recipe Upload Failed. Please try again.");
                 } else if (this.value.filter(prog => prog == "p").length < 1) {
                     // if all values are "c", then upload is complete
                     document.querySelector(".status p").innerHTML = "Upload Complete!";
-
-                    var a = document.createElement("a");
-                    a.innerHTML = "Submit Another Recipe";
-                    a.setAttribute("href", "index.html");
-                    document.querySelector(".status").appendChild(a);
+                    document.querySelector(".status div").style.display = "block";
                 }
             }
         };
-        for (var i=0; i<(9+stepFilesInputs.length+(ingredientsInputs.length/2)+stepTextsInputs.length); i++)
+        for (var i=0; i<(4 + (ingredientsInputs.length/2)); i++)
             PROGRESS.value.push("p");
 
         var recipeId = database.ref("recipes/").push().key;
@@ -138,16 +125,6 @@ function loadForm() {
                     "average": "NO_RATING"
                     // "raters": {}
                 }
-            },
-            "videos": {
-                "creator": {
-                    "created": "NO",
-                    "url": "NO_URL"
-                },
-                "community": {
-                    "created": "NO"
-                    // "users": {}
-                }
             }
         }, err => {
             if (err) {
@@ -165,78 +142,18 @@ function loadForm() {
                     } else PROGRESS.log(1, "c");
                 });
 
-                if (videoFile) {
-                    database.ref(`recipes/${recipeId}/videos/creator`).set({
-                        "created": "YES",
-                        "url": `videos/${recipeId}/${videoFile.name}`
-                    }, err => {
-                        if (err) {
-                            errorAlert(err);
-                            PROGRESS.log(2, "f");
-                        } else PROGRESS.log(2, "c");
-                    });
-                    database.ref(`users/${auth.getUid()}/videos/submissions`).push({
-                        "id": recipeId
-                    }, err => {
-                        if (err) {
-                            errorAlert(err);
-                            PROGRESS.log(3, "f");
-                        } else PROGRESS.log(3, "c");
-                    });
-                    storage.ref().child(`videos/${recipeId}/${videoFile.name}`).put(videoFile)
-                    .then(snapshot => {
-                        console.log(snapshot);
-                        PROGRESS.log(4, "c");
-                        uploadFiles([...stepFilesInputs, thumbnail], 0);
-                    })
-                    .catch(err => {
-                        if (err) {
-                            errorAlert(err);
-                            PROGRESS.log(4, "f");
-                        }
-                    })
-                } else {
-                    PROGRESS.log(2, "c");
-                    PROGRESS.log(3, "c");
-                    PROGRESS.log(4, "c");
-                    uploadFiles([...stepFilesInputs, thumbnail], 0);
-                }
-
-                function uploadFiles(arr, idx) {
-                    if (arr[idx]) {
-                        storage.ref().child(`images/${recipeId}/${arr[idx].name}`).put(arr[idx])
-                        .then(snapshot => {
-                            PROGRESS.log(5+idx, "c");
-                            if ((idx+1) < arr.length) uploadFiles(arr, idx + 1);
-                        })
-                        .catch(err =>{
-                            errorAlert(err);
-                            PROGRESS.log(5+idx, "f");
-                        });
-                    } else if ((idx + 1) < arr.length) {
-                        PROGRESS.log(5+idx, "c");
-                        uploadFiles(arr, idx + 1);
-                    } else PROGRESS.log(5+idx, "c");
-                }
-
                 var placeholder = { "id": "NO_ID" };
                 database.ref(`recipes/${recipeId}/reviews/community/raters`).push(placeholder, err => {
                     if (err) {
                         errorAlert(err);
-                        PROGRESS.log(6+stepFilesInputs.length, "f");
-                    } else PROGRESS.log(6+stepFilesInputs.length, "c");
+                        PROGRESS.log(2, "f");
+                    } else PROGRESS.log(2, "c");
                 });
                 database.ref(`recipes/${recipeId}/reviews/photo/raters`).push(placeholder, err => {
                     if (err) {
                         errorAlert(err);
-                        PROGRESS.log(7+stepFilesInputs.length, "f");
-                    } else PROGRESS.log(7+stepFilesInputs.length, "c");
-                });
-                database.ref(`recipes/${recipeId}/videos/community/users`).push(placeholder, err => {
-                    if (err) {
-                        errorAlert(err);
-                        PROGRESS.log(8+stepFilesInputs.length, "f");
-                    } else PROGRESS.log(8+stepFilesInputs.length, "c");
+                        PROGRESS.log(3, "f");
+                    } else PROGRESS.log(3, "c");
                 });
 
 
@@ -252,7 +169,7 @@ function loadForm() {
                                 PROGRESS.log((idx/2) + offset, "f");
                             } else PROGRESS.log((idx/2) + offset, "c");
                         });
-                    })(i*2, 9+stepFilesInputs.length);
+                    })(i*2, 4);
                 }
                 
                 // upload instructions
@@ -260,15 +177,14 @@ function loadForm() {
                     (function(idx, offset) {
                         database.ref(`recipes/${recipeId}/instructions`).push({
                             "step": `${idx + 1}`,
-                            "text": stepTextsInputs[idx],
-                            "url": ((stepFilesInputs[idx]) ? `images/${recipeId}/${stepFilesInputs[idx].name}` : "NO_URL")
+                            "text": stepTextsInputs[idx]
                         }, err => {
                             if (err) {
                                 errorAlert(err);
                                 PROGRESS.log(idx + offset, "f");
                             } else PROGRESS.log(idx + offset, "c");
                         });
-                    })(j, 9+stepFilesInputs.length+(ingredientsInputs.length/2));
+                    })(j, 4 + (ingredientsInputs.length/2));
                 }
             }
         });
@@ -307,22 +223,21 @@ function newInput(label, type, ...add) {
 }
 
 function newRmvBtn(label = "Parent") {
-    var r = document.createElement("button");
-    r.innerHTML = `Remove ${label}`;
+    var r = document.createElement("div");
+
     r.onclick = function() {
         event.preventDefault();
         var parent = r.parentNode,
             grandparent = parent.parentNode;
 
+        if (grandparent.children.length < 2) return errorAlert("You can't have a recipe without at least one ingredient.");
+
         grandparent.removeChild(parent);
 
-        if (grandparent.children.length < 1) {
-            var d = document.createElement("div");
-            var p = document.createElement("p");
-            p.innerHTML = "No item in this section.";
+        if (label == "Step") {
+            var stepLabels = Array.from(document.querySelectorAll(".recipe-form-STEP-INPUT-BOX-text label"));
 
-            d.appendChild(p);
-            grandparent.appendChild(d);
+            for (var i=0; i<stepLabels.length; i++) stepLabels[i].innerHTML = `Step ${i + 1}`;
         }
     };
 
@@ -331,32 +246,36 @@ function newRmvBtn(label = "Parent") {
 
 function newIngredientInput() {
     var i = document.createElement("div");
-    i.appendChild(newInput("Ingredient", "text"));
-    i.appendChild(newInput("Quantity", "text"));
-    i.appendChild(newRmvBtn("Ingredient"));
+    i.setAttribute("class", "ingredients-box-INPUT-BOX");
+
+    var ii = newInput("Ingredient", "text");
+    ii.setAttribute("class", "ingredients-box-INPUT-BOX-text");
+    i.appendChild(ii);
+
+    var iq = newInput("Quantity", "text");
+    iq.setAttribute("class", "ingredients-box-INPUT-BOX-quantity");
+    i.appendChild(iq);
+
+    var ib = newRmvBtn("Ingredient");
+    ib.setAttribute("class", "ingredients-box-INPUT-BOX-button");
+    i.appendChild(ib);
 
     return i;
 }
 
 function newStepInput() {
     var i = document.createElement("div");
-    i.appendChild(newInput("Step", "text"));
-    i.appendChild(newInput("Step Image", "file", {
-        accept: "image/png, image/jpeg"
-    }));
-    i.appendChild(newRmvBtn("Step"));
+    i.setAttribute("class", "recipe-form-STEP-INPUT-BOX");
+
+    var stepLabels = document.querySelectorAll(".recipe-form-STEP-INPUT-BOX-text label");
+
+    var is = newInput(`Step ${stepLabels.length + 1}`, "text");
+    is.setAttribute("class", "recipe-form-STEP-INPUT-BOX-text")
+    i.appendChild(is);
+
+    var ib = newRmvBtn("Step");
+    ib.setAttribute("class", "recipe-form-STEP-INPUT-BOX-button")
+    i.appendChild(ib);
 
     return i;
 }
-
-// how to get file for storage:
-// let storageRef = storage.ref("images/wasiagoodmeme.jpg").getDownloadURL().then(result => {
-//     console.log(result);
-//     let imgEle = document.createElement("img");
-//     document.body.appendChild(imgEle);
-
-//     imgEle.src = result;
-//     imgEle.style.width = "400px";
-//     imgEle.style.height = "400px";
-//     imgEle.style.backgroundColor = "red";
-// }).catch(err => alert(err.message));
