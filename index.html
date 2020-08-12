@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipedia</title>
+    <link rel="stylesheet" href="lib/styles/style.css">
+    <script src="lib/scripts/main.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+    <link rel="shortcut icon" href="assets/recipedia_logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <section class="intro">
+        <section class="head">
+            <img src="assets/recipedia_logo.png" alt="">
+            <h1>Recipedia</h1>
+        </section>
+        <section class="direct">
+            <div class="direct-container">
+                <a href="recipe/index.html">Find Recipe</a>
+                <a href="javascript:void(0)" onclick="openAuth(1);">Log In</a>
+                <a href="javascript:void(0)" onclick="openAuth(2);">Sign Up</a>
+                <a href="recipe/submit/index.html">Submit Recipe</a>
+            </div>
+        </section>
+    </section>
+    <section class="info">
+        <div class="info-container effect">
+            <h1>What is Recipedia?</h1>
+            <p>
+                Recipedia is a project that allows users to quickly find recipes from our database based on the ingredients they have in their cupboard. All our recipes are user-submitted and community-rated, so you will always get best of the best recipes! Recipedia will make sure that you will never have to skip a meal just because you didn't have a good recipe for the ingredients in your home!
+            </p>
+        </div>
+        <div class="info-container effect">
+            <h1>What is the Mission?</h1>
+            <p>
+                People often resort to fast food when they can't make a meal at home with what they have. Recipedia seeks to empower those individuals to eat in a more healthy style by providing them with recipes based on the ingredients they have at home. This way, fast food does not have to be people's number one option when it comes to keeping their tummies from growling.
+            </p>
+        </div>
+        <div class="info-container effect">
+            <h1>How does it Work?</h1>
+            <p>
+                Users get to enter in as many ingredients as they want to be in a recipe and Recipedia search engine will do the rest! The search engine is still in its early stages but it will find all the recipes on our database that have at least one of the ingredient the user entered, and the user get to click a recipe to learn more.
+            </p>
+        </div>
+        <div class="info-container effect">
+            <h1>Who are the Authors?</h1>
+            <p>
+                Recipedia is a project built within 4 days by several high-schoolers:
+            </p>
+            <ul>
+                <li>
+                    Dominick George (Visual Aspects Prototype)
+                </li>
+                <li>
+                    Michael Treusdell (Visual Aspects Prototype)
+                </li>
+                <li>
+                    Yangfa Wu (Client-Database Interaction & Website Mainframe)
+                </li>
+            </ul>
+        </div>
+        <div class="info-container effect">
+            <h1>What are some Future Plans?</h1>
+            <p>
+                These are some plans that Recipedia hope to get done in the future:
+            </p>
+            <ul>
+                <li>Search Engine returning recipes in the order of ratings</li>
+                <li>Search engine returning recipes in the order of match-ness</li>
+                <li>Using APIs to add more recipes</li>
+                <li>Develop a profile page for users to see their activity</li>
+                <li>Adding a reward system to encourage users to use our project</li>
+            </ul>
+        </div>
+    </section>
+    <section class="foot">
+        &copy; Copyright 2020, Recipedia. All rights reserved.
+    </section>
+    <div class="error-box hidden">
+        <div class="error-content">
+            <h1>Error</h1>
+            <p class="error-msg">
+                Cannot Process.
+            </p>
+            <button>Ok</button>
+        </div>
+    </div>
+</body>
+</html>

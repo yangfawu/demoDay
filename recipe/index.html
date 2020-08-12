@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipedia</title>
+    <link rel="stylesheet" href="lib/styles/style.css">
+    <script src="lib/scripts/main.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-storage.js"></script>
+    <link rel="shortcut icon" href="assets/recipedia_logo.png" type="image/png">
+</head>
+<body>
+    <h1>Recipedia Recipe Look Up</h1>
+    <h3>Brought to you by Dominick, Michael, and Yangfa.</h3>
+    <div>
+        <ul>
+            <li><a href="../index.html">Go Home</a></li>
+            <li><a href="submit/index.html">Go Submit a Recipe if u r logged in</a></li>
+        </ul>
+    </div>
+    <hr>
+    <div class="search-form">
+        <form>
+            <h1>Lookup Any Recipe On Our Database By Typing In The Ingreidents You Want To Use!</h1>
+            <div class="ingredient-query-box">
+                <div class="ingredient-query">
+                    <div>
+                        <input type="text" id="">
+                        <button>Remove Ingredient</button>
+                    </div>
+                </div>
+                <button id="moreBtn">Add Ingredient</button>
+            </div>
+            <button id="submitBtn">Search For A Recipe</button>
+        </form>
+    </div>
+    <div class="results-box">
+        <h1>Search Results</h1>
+        <h3>Searching our database...</h3>
+        <div class="results">
+            <!-- SEARCH RESULTS GO HERE -->
+        </div>
+    </div>
+    <div class="recipe-summary">
+        <div class="recipe-summary-head">
+            <h1>Recipe Title</h1>
+            <h2>Uploaded on sdfs</h2>
+            <h2>By [User]</h2>
+            <p>Recipe Description</p>
+        </div>
+        <div class="recipe-summary-thumbnail">
+            <img src="" alt="thumbnail">
+        </div>
+        <div class="recipe-summary-ingredients">
+            <ul>
+                <li>[Item] ([Quantity])</li>
+            </ul>
+        </div>
+        <div class="recipe-summary-instruction">
+            <div>
+                <h1>Step [#]</h1>
+                <p>[step info]</p>
+                <img src="" alt="step picture [optional]">
+            </div>
+        </div>
+        <div class="recipe-summary-review">
+            <div class="recipe-summary-review-community">
+                <div class="recipe-summary-review-community-stats">
+                    <h1>Community Review</h1>
+                    <p>Average Rating: [#]</p>
+                    <p>There are currently [#] community raters on this recipe.</p>
+                </div>
+                <div class="recipe-summary-review-community-personal">
+                    <a href="../login/index.html">Go Login To Leave a Review</a>
+                    <h1>Give your own community rating for this recipe!</h1>
+                    <button id="communityReviewBtn">Give my community review</button>
+                    <form action=""> <!--ONLY Shows up when u click on the button-->
+                        <div>
+                            <h1>Rating out of 5 stars</h1>
+                            <select name="" id="">
+                                <option value="0">0 stars</option>
+                                <option value="1">1 star</option>
+                                <option value="2">2 stars</option>
+                                <option value="3">3 stars</option>
+                                <option value="4">4 stars</option>
+                                <option value="5">5 stars</option>
+                            </select>
+                        </div>
+                        <button id="communitySubmitBtn">Submit Community Review</button>
+                    </form>
+                </div>
+            </div>
+            <div class="recipe-summary-review-photo">
+                <div class="recipe-summary-review-photo-stats">
+                    <h1>Photo Review</h1>
+                    <p>Average Rating: [#]</p>
+                    <p>There are currently [#] photo raters on this recipe.</p>
+                </div>
+                <div class="recipe-summary-review-photo-personal">
+                    <a href="../login/index.html">Go Login To Leave a Review</a>
+                    <h1>Give your own photo rating for this recipe!</h1>
+                    <button id="photoReviewBtn">Give my photo review</button>
+                    <form action=""> <!--ONLY Shows up when u click on the button-->
+                        <div class="recipe-summary-photo-rating">
+                            <h1>Rating out of 5 stars</h1>
+                            <select name="" id="">
+                                <option value="0">0 stars</option>
+                                <option value="1">1 star</option>
+                                <option value="2">2 stars</option>
+                                <option value="3">3 stars</option>
+                                <option value="4">4 stars</option>
+                                <option value="5">5 stars</option>
+                            </select>
+                        </div>
+                        <div class="recipe-summary-photo-reason">
+                            <h1>Reason</h1>
+                            <input type="text">
+                        </div>
+                        <div class="recipe-summary-photo-image">
+                            <h1>Insert an Image of the Meal You Made using the recipe</h1>
+                            <input type="file" name="" id="">
+                        </div>
+                        <button id="photoSubmitBtn">Submit Photo Review</button>
+                    </form>
+                </div>
+                <div class="recipe-summary-review-photo-gallery"> <!--will only show when there is at least one photo review-->
+                    <div class="photo-gallery-box">
+                        <img src="" alt="">
+                        <div class="photo-gallery-box-testimony">
+                            <p>Rated [#] out of 5 Stars</p>
+                            <p>"[reason]" - [user]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="error-box hidden">
+        <div class="error-content">
+            <h1>Error</h1>
+            <p class="error-msg">
+                Cannot Process.
+            </p>
+            <div>Ok</div>
+        </div>
+    </div>
+</body>
+</html>

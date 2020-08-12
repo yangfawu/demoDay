@@ -1,0 +1,526 @@
+body {
+    margin: 0;
+    background-color: #B8F2E6;
+    font-family: 'Baloo 2', cursive;
+}
+
+.error-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    place-items: center;
+    display: none;
+    z-index: 105;
+}
+
+.error-content {
+    background-color: white;
+    margin: 10px;
+    padding: 10px;
+    width: calc(600px - 20px);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.error-content h1 {
+    margin: 0;
+    font-weight: normal;
+}
+
+.error-content p {
+    text-align: left;
+    margin: 0;
+}
+
+@media (max-width: 620px) {
+    .error-content {
+        width: calc(100% - 40px);
+    }
+}
+
+.intro {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    padding: 0px 10px 50px 10px;
+    flex-direction: column;
+}
+
+.head img {
+    width: 200px;
+    height: auto;
+}
+
+.head h1 {
+    font-family: 'Marck Script', cursive;
+    font-weight: normal;
+    font-size: 80px;
+    margin: 20px 0px 0px 0px;
+    letter-spacing: 0.2ch;
+}
+
+.direct {
+    padding: 0px 10px 0px 10px;
+}
+
+.direct-container {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 700px;
+}
+
+.direct-container a {
+    background-color: #FAF3DD;
+    text-align: center;
+    flex: 1;
+    margin: 0px 10px;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    color: black;
+    transition: background-color 0.4s;
+    box-shadow: 2px 2px 8px #4baaba;
+    animation: fadeIn 1s 1 ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.direct-container a:hover {
+    background-color: #ffdcd9;
+}
+
+.info-container {
+    padding: 25px 70px 30px 70px;
+    width: 700px;
+    background-color: #FAF3DD;
+    margin: 50px auto;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px #4baaba;
+}
+
+.info-container h1 {
+    margin: 0px 0px 5px 0px;
+    font-weight: normal;
+    text-align: center;
+    font-size: 40px;
+}
+
+.info-container p {
+    margin: 0;
+    font-size: 20px;
+}
+
+.info-container ul {
+    margin: 0px;
+    padding-left: 30px;
+}
+
+.info-container ul li {
+    font-size: 20px;
+}
+
+.foot {
+    text-align: center;
+    font-size: small;
+    background-color: #AED9E0;
+}
+
+.effect {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: transform 0.75s;
+}
+
+.AUTH-modal-container {
+    position: absolute;
+    width: 100%;
+    height: fit-content;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 99;
+}
+
+.AUTH-modal {
+    background-color: #B8F2E6;
+    border-radius: 10px;
+    margin: 30px auto;
+    width: 700px;
+    padding: 20px;
+}
+
+.AUTH-modal-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.AUTH-modal-header img {
+    width: 75px;
+    height: auto;
+}
+
+@media (max-width: 800px) {
+    .AUTH-modal-header img {
+        width: 65px;
+    }
+}
+
+@media (max-width: 670px) {
+    .AUTH-modal-header img {
+        width: 60px;
+    }
+}
+
+@media (max-width: 540px) {
+    .AUTH-modal-header img {
+        width: 50px;
+    }
+}
+
+@media (max-width: 350px) {
+    .AUTH-modal-header img {
+        width: 45px;
+    }
+}
+
+.AUTH-modal-header h1 {
+    font-family: 'Marck Script', cursive;
+    font-weight: normal;
+    font-size: 60px;
+    margin: 0;
+}
+
+.AUTH-modal-form-title {
+    margin: 0;
+    font-weight: normal;
+    text-align: center;
+    font-size: 40px;
+}
+
+.AUTH-modal-form-FORM {
+    width: 350px;
+    margin: auto;
+    text-align: center;
+}
+
+.AUTH-modal-form-FORM div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.AUTH-modal-form-FORM div label {
+    text-align: left;
+    font-size: 20px;
+}
+
+.AUTH-modal-form-FORM div input {
+    text-align: left;
+    font-family: 'Baloo 2', cursive;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+}
+
+.AUTH-modal-form-FORM button, .AUTH-modal-form-results button,.error-content button {
+    font-family: 'Baloo 2', cursive;
+    font-size: 16px;
+    border-radius: 10px;
+    padding: 5px;
+    letter-spacing: 0.3ch;
+    border: none;
+    background-color: #FAF3DD;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.AUTH-modal-form-FORM button:hover, .AUTH-modal-form-results button:hover, .error-content button:hover {
+    background-color: #ffdcd9;
+}
+
+.AUTH-modal-form-FORM button:active, .AUTH-modal-form-results button:active, .error-content button:active {
+    background-color: darksalmon;
+}
+
+.AUTH-modal-form-results {
+    text-align: center;
+    font-size: 16px;
+    width: 350px;
+    margin: auto;
+}
+
+@media (max-width: 800px) {
+    .AUTH-modal {
+        margin: 30px;
+        width: calc(100% - 100px);
+    }
+}
+
+@media (max-width: 450px) {
+    .AUTH-modal-form-FORM {
+        width: 100%;
+    }
+}
+
+@media (max-width: 930px) {
+    .info-container {
+        width: calc(100% - 180px);
+        padding: 25px 30px 30px 30px;
+        margin: 50px 60px;
+    }
+}
+
+@media (max-width: 820px) {
+    .head h1 {
+        font-size: 76px;
+    }
+
+    .AUTH-modal-header h1 {
+        font-size: 54px;
+    }
+
+    .AUTH-modal-form-title {
+        font-size: 36px;
+    }
+
+    .direct {
+        padding: 0px;
+        margin: 0px 60px;
+        width: 100%;
+    }
+
+    .direct-container {
+        width: calc(100% - 120px);
+    }
+
+    .direct-container a {
+        font-size: 16px;
+    }
+
+    .info-container h1 {
+        font-size: 36px;
+    }
+
+    .AUTH-modal-form-FORM div label {
+        font-size: 18px;
+    }
+
+    .info-container p {
+        font-size: 16px;
+    }
+    
+    .info-container ul {
+        padding-left: 25px;
+    }
+
+    .info-container ul li {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 672px) {
+    .head h1 {
+        font-size: 74px;
+    }
+
+    .AUTH-modal-header h1 {
+        font-size: 50px;
+    }
+
+    .AUTH-modal-form-title {
+        font-size: 32px;
+    }
+
+    .direct-container a {
+        font-size: 14px;
+    }
+
+    .info-container h1 {
+        font-size: 34px;
+    }
+
+    .AUTH-modal-form-FORM div label {
+        font-size: 16px;
+    }
+
+    .info-container p, .AUTH-modal-form-FORM button, .AUTH-modal-form-results button,.error-content button, .AUTH-modal-form-FORM div input {
+        font-size: 14px;
+    }
+
+    .info-container ul {
+        padding-left: 20px;
+    }
+    
+    .info-container ul li {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 625px) {
+    .head h1 {
+        font-size: 76px;
+    }
+
+    .AUTH-modal-header h1 {
+        font-size: 52px;
+    }
+
+    .AUTH-modal-form-title {
+        font-size: 34px;
+    }
+
+    .direct {
+        padding: 0px;
+        margin: 0px 20px;
+        width: 100%;
+    }
+
+    .direct-container {
+        width: calc(100% - 40px);
+    }
+
+    .direct-container a {
+        font-size: 16px;
+    }
+
+    .info-container {
+        width: calc(100% - 80px);
+        padding: 15px 20px 20px 20px;
+        margin: 50px 20px;
+    }
+
+    .info-container h1 {
+        font-size: 36px;
+    }
+
+    .AUTH-modal-form-FORM div label {
+        font-size: 18px;
+    }
+
+    .info-container p, .AUTH-modal-form-FORM button, .AUTH-modal-form-results button,.error-content button, .AUTH-modal-form-FORM div input {
+        font-size: 16px;
+    }
+    
+    .info-container ul li {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 590px) {
+    .direct-container {
+        flex-wrap: wrap;
+        width: calc(100% - 20px);
+        align-items: center;
+        justify-content: center;
+    }
+
+    .direct-container a {
+        width: calc(50% - 40px);
+        flex: none;
+        margin: 10px;
+    }
+}
+
+@media (max-width: 540px) {
+    .head h1 {
+        font-size: 66px;
+    }
+
+    .AUTH-modal-header h1 {
+        font-size: 44px;
+    }
+
+    .info-container h1, .AUTH-modal-form-title {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 480px) {
+    .head {
+        padding-bottom: 30px;
+    }
+
+    .head img {
+        width: 150px;
+    }
+
+    .direct-container a {
+        font-size: 12px;
+    }
+
+    .AUTH-modal-form-FORM div label {
+        font-size: 14px;
+    }
+
+    .info-container p, .AUTH-modal-form-FORM button, .AUTH-modal-form-results button,.error-content button, .AUTH-modal-form-FORM div input {
+        font-size: 12px;
+    }
+
+    .info-container ul {
+        padding-left: 20px;
+    }
+    
+    .info-container ul li {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 405px) {
+    .info-container h1 {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 350px) {
+    .head h1 {
+        font-size: 50px;
+    }
+
+    .AUTH-modal-header h1 {
+        font-size: 40px;
+    }
+    
+    .AUTH-modal-form-title {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 280px) {
+    .head h1 {
+        font-size: 40px;
+    }
+
+    .AUTH-modal-header h1 {
+        font-size: 38px;
+    }
+
+    .AUTH-modal-form-title {
+        font-size: 20px;
+    }
+}
+
+@media (max-height: 530px) {
+    .intro {
+        height: fit-content;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+}
