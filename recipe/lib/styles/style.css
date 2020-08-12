@@ -1,7 +1,14 @@
 body {
     margin: 0;
 }
-
+.rechead{
+    background-color: #5271FF;
+    text-align: center;
+    
+}
+.recheadimg{
+    height: 85px;
+}
 .error-box {
     position: fixed;
     top: 0;
@@ -50,6 +57,7 @@ body {
 }
 
 .results-recipe-box {
+    border-radius: 5%;
     width: calc(100% - 20px);
     background-color: burlywood;
     display: grid;
@@ -61,7 +69,7 @@ body {
 }
 
 .results-recipe-box:hover {
-    background-color: coral;
+    background-color: #5271FF;
 }
 
 .results-recipe-box img {

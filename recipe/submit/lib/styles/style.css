@@ -1,7 +1,14 @@
 body {
     margin: 0;
 }
-
+.recsub{
+    background-color: #5271FF;
+    text-align: center;
+    
+}
+.recsubimg{
+    height: 85px;
+}
 .error-box {
     position: fixed;
     top: 0;
