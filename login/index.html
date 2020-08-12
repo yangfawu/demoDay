@@ -5,34 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipedia</title>
     <link rel="stylesheet" href="lib/styles/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap" rel="stylesheet">
     <script src="lib/scripts/main.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+    <link rel="shortcut icon" href="assets/recipedia_logo.png" type="image/png">
 </head>
 <body>
-    <hr>
-    <div class="header">
-        <img src="assets/Recipedia (3).png" class="loginheadimg">
-    </div>
+    <h1>Recipedia Log In Page</h1>
+    <h3>Brought to you by Dominick, Michael, and Yangfa.</h3>
     <div>
         <ul>
-            <li><a href="../index.html" class='home'>Go Home</a></li>
-            <li><a href="../signup/index.html" class='backsign'>Go To Sign Up</a></li>
+            <li><a href="../index.html">Go Home</a></li>
+            <li><a href="../signup/index.html">Go To Sign Up</a></li>
         </ul>
     </div>
+    <hr>
     <div class="login">
         <form>
             <div>
+                <label for="email">Email:</label>
                 <input type="email" id="email">
-                <p class='email'>Email Address</p>
             </div>
-            <div></div>
+            <div>
+                <label for="password">Password:</label>
                 <input type="password" id="password">
-                <p class="password">Password</p>
             </div>
-            <button class = loginbut>Login</button>
+            <button>Log In</button>
         </form>
     </div>
     <div class="success">

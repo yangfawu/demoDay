@@ -4,40 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipedia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="lib/styles/style.css">
     <script src="lib/scripts/main.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+    <link rel="shortcut icon" href="assets/recipedia_logo.png" type="image/png">
 </head>
 <body>
-    <div class='signpagehead'>
-        <img  class='signheadimg' src='assets/Recipedia (3).png'>
-    </div>
+    <h1>Recipedia Sign Up Page</h1>
     <h3>Brought to you by Dominick, Michael, and Yangfa.</h3>
+    <div>
+        <ul>
+            <li><a href="../index.html">Go Home</a></li>
+        </ul>
+    </div>
     <hr>
-    <a href="../index.html" class='home'>Go Home</a>    
-    <a href="../login/index.html" class='backsign'>Go To Sign In</a>
     <div class="signup">
         <form>
             <div>
-                <label for="firstname" class='firstname'>First Name:</label>
+                <label for="firstname">First Name:</label>
                 <input type="text" id="firstname" placeholder="John">
             </div>
             <div>
-                <label for="lastname" class='lastname'>Last Name:</label>
+                <label for="lastname">Last Name:</label>
                 <input type="text" id="lastname" placeholder="Doe">
             </div>
             <div>
-                <label for="email" class='upemail'>Email:</label>
+                <label for="email">Email:</label>
                 <input type="email" id="email">
             </div>
             <div>
-                <label for="password" class='uppassword'>Password:</label>
+                <label for="password">Password:</label>
                 <input type="password" id="password">
             </div>
-            <button class='signupbut'>Lets get cooking</button>
+            <button>Sign Up</button>
         </form>
     </div>
     <div class="success">

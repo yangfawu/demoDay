@@ -27,8 +27,6 @@ var errorAlert = (msg = "Error Message.") => {
     document.querySelector(".error-msg").innerHTML = msg;
 };
 
-
-
 // Logged In Logistics
 let USER_LOGGED_IN = false;
 auth.onAuthStateChanged(user => {
