@@ -1,6 +1,14 @@
 body {
     margin: 0;
 }
+.signpagehead{
+    text-align: center;
+    height: 70px;
+}
+.signheadimg{
+    height:70px;
+
+}
 .home{
     position: absolute;
     top: 18.55%;
@@ -80,7 +88,7 @@ background: #5271FF;
 }
 .firstname{
 top: 24.55%;
-left: 31.88%;
+left: 45.88%;
 bottom: 73.77%;
 right: 30.43%;
 position:absolute;
@@ -94,7 +102,7 @@ line-height: 24px;
     position:absolute;
     top:30%;
     bottom:70%;
-    left:25%;
+    left:40%;
     height: 30px;
     width:250px;
     background: #FFFFFF;
@@ -105,7 +113,7 @@ line-height: 24px;
 }
 .lastname{
 top:40%;
-left:34%;
+left:45%;
 position:absolute;
 font-family: Josefin Sans;
 font-style: normal;
@@ -116,7 +124,7 @@ line-height: 24px;
 #lastname{
     position:absolute;
     top:45%;
-    left:25%;
+    left:40%;
     height: 30px;
     width:250px;
     background: #FFFFFF;
@@ -127,7 +135,7 @@ line-height: 24px;
 }
 .upemail{
 top:55%;
-left:38%;
+left:45%;
 position:absolute;
 font-family: Josefin Sans;
 font-style: normal;
@@ -139,7 +147,7 @@ line-height: 24px;
 #email{
 top:60%;
 position:absolute;
-left:25%;
+left:40%;
 height: 30px;
 width:250px;
 background: #FFFFFF;
@@ -150,7 +158,7 @@ border-radius: 10px;
 }
 .uppassword{
 top:70%;
-left:35%;
+left:45%;
 position:absolute;
 font-family: Josefin Sans;
 font-style: normal;
@@ -161,7 +169,7 @@ line-height: 24px;
 #password{
 top:75%;
 position:absolute;
-left:25%;
+left:40%;
 height: 30px;
 width:250px;
 background: #FFFFFF;
@@ -173,6 +181,6 @@ border-radius: 10px;
 .signupbut{
 position:absolute;
 top:83%;
-left:35%;
+left:45%;
 
 }
