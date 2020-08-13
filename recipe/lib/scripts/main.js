@@ -510,6 +510,52 @@ function displayMatches(recipeKeys, recipes) {
 
             rsrp.appendChild(rsrps);
 
+            // recipe-summary-review-photo-gallery
+            var rsrpg = document.createElement("div");
+            rsrpg.setAttribute("class", "recipe-summary-review-photo-gallery");
+
+            var PHOTO_RATINGS = Object.values(recipe.reviews.photo.raters);
+            if (PHOTO_RATINGS.length < 2) {
+                var EMPTY_PHOTO_RESPONSE = document.createElement("p");
+                EMPTY_PHOTO_RESPONSE.innerHTML = "This recipe currently doesn't have any photo reviews.";
+
+                rsrpg.appendChild(EMPTY_PHOTO_RESPONSE);
+            } else if (PHOTO_RATINGS.length >= 2) {
+                for (var i=0; i<PHOTO_RATINGS.length; i++) {
+                    var rating = PHOTO_RATINGS[i];
+                    if (rating.id !== "NO_ID") {
+                        var rsrpgpgb = document.createElement("div");
+                        rsrpgpgb.setAttribute("class", "photo-gallery-box");
+
+                        var rsrpgpgbi = document.createElement("img");
+                        storage.ref(`${rating.url}`).getDownloadURL().then(result => {
+                            rsrpgpgbi.src = result;
+                        }).catch(err => errorAlert(err));
+
+                        rsrpgpgb.appendChild(rsrpgpgbi);
+
+                        var rsrpgpgbd = document.createElement("div");
+                        rsrpgpgbd.setAttribute("class", "photo-gallery-box-testimony");
+                        
+                        var rsrpgpgbdR = document.createElement("p");
+                        rsrpgpgbdR.innerHTML = `User rated ${rating.rating}/5`;
+
+                        database.ref(`users/${rating.id}/name`).once('value')
+                        .then(snapshot => {
+                            var first = snapshot.val().first;
+                            rsrpgpgbdR.innerHTML = `${first} rated ${rating.rating}/5`;
+                        })
+
+                        rsrpgpgbd.appendChild(rsrpgpgbdR);
+
+                        rsrpgpgb.appendChild(rsrpgpgbd);
+
+                        rsrpg.appendChild(rsrpgpgb);
+                    }
+                }
+            }
+
+
             // recipe-summary-review-community-personal
             var rsrpp = document.createElement("div");
             rsrpp.setAttribute("class", "recipe-summary-review-community-personal");
@@ -555,11 +601,6 @@ function displayMatches(recipeKeys, recipes) {
                         ratingPhoto.appendChild(ratingPhotoI);
                         rsrppForm.appendChild(ratingPhoto);
 
-                        var ratingReason = document.createElement("div");
-                        var ratingReasonH = document.createElement("h1");
-                        ratingReasonH.innerHTML = "Reason for Review";
-                        ratingReason.appendChild(ratingReasonH);
-
                         var comReSubmitBTN = document.createElement("button");
                         comReSubmitBTN.innerHTML = "Submit Photo Review";
                         comReSubmitBTN.onclick = function() {
@@ -600,6 +641,48 @@ function displayMatches(recipeKeys, recipes) {
                             var rsrpRAVERAGE = sum/(RATERS.length-1);
                             rsrpsR.innerHTML = `Average Rating: ${(rsrpRAVERAGE.toString().length > 1) ? rsrpRAVERAGE.toFixed(1) : rsrpRAVERAGE}/5`;
                             rsrpsL.innerHTML = `There ${(RATERS.length-1 == 0 || RATERS.length-1 > 1) ? "are" : "is"} currently ${RATERS.length - 1} photo rater${(RATERS.length-1 == 1) ? "" : "s"} on this recipe.`;
+
+                            var PHOTO_RATINGS = [...Object.values(recipe.reviews.photo.raters), UPDATE];
+                            if (PHOTO_RATINGS.length < 2) {
+                                var EMPTY_PHOTO_RESPONSE = document.createElement("p");
+                                EMPTY_PHOTO_RESPONSE.innerHTML = "This recipe currently doesn't have any photo reviews.";
+
+                                rsrpg.appendChild(EMPTY_PHOTO_RESPONSE);
+                            } else if (PHOTO_RATINGS.length >= 2) {
+                                rsrpg.innerHTML = "";
+                                for (var i=0; i<PHOTO_RATINGS.length; i++) {
+                                    var rating = PHOTO_RATINGS[i];
+                                    if (rating.id !== "NO_ID") {
+                                        var rsrpgpgb = document.createElement("div");
+                                        rsrpgpgb.setAttribute("class", "photo-gallery-box");
+
+                                        var rsrpgpgbi = document.createElement("img");
+                                        storage.ref(`${rating.url}`).getDownloadURL().then(result => {
+                                            rsrpgpgbi.src = result;
+                                        }).catch(err => errorAlert(err));
+
+                                        rsrpgpgb.appendChild(rsrpgpgbi);
+
+                                        var rsrpgpgbd = document.createElement("div");
+                                        rsrpgpgbd.setAttribute("class", "photo-gallery-box-testimony");
+                                        
+                                        var rsrpgpgbdR = document.createElement("p");
+                                        rsrpgpgbdR.innerHTML = `User rated ${rating.rating}/5`;
+
+                                        database.ref(`users/${rating.id}/name`).once('value')
+                                        .then(snapshot => {
+                                            var first = snapshot.val().first;
+                                            rsrpgpgbdR.innerHTML = `${first} rated ${rating.rating}/5`;
+                                        })
+
+                                        rsrpgpgbd.appendChild(rsrpgpgbdR);
+
+                                        rsrpgpgb.appendChild(rsrpgpgbd);
+
+                                        rsrpg.appendChild(rsrpgpgb);
+                                    }
+                                }
+                            }
 
                             var rsrppFormCONFIRM = document.createElement("p");
                             rsrppFormCONFIRM.innerHTML = "Thank you for your review!";
@@ -647,52 +730,6 @@ function displayMatches(recipeKeys, recipes) {
             }
             
             rsrp.appendChild(rsrpp);
-
-
-            // recipe-summary-review-photo-gallery
-            var rsrpg = document.createElement("div");
-            rsrpg.setAttribute("class", "recipe-summary-review-photo-gallery");
-
-            var PHOTO_RATINGS = Object.values(recipe.reviews.photo.raters);
-            if (PHOTO_RATINGS.length < 2) {
-                var EMPTY_PHOTO_RESPONSE = document.createElement("p");
-                EMPTY_PHOTO_RESPONSE.innerHTML = "This recipe currently doesn't have any photo reviews.";
-
-                rsrpg.appendChild(EMPTY_PHOTO_RESPONSE);
-            } else if (PHOTO_RATINGS.length >= 2) {
-                for (var i=0; i<PHOTO_RATINGS.length; i++) {
-                    var rating = PHOTO_RATINGS[i];
-                    if (rating.id !== "NO_ID") {
-                        var rsrpgpgb = document.createElement("div");
-                        rsrpgpgb.setAttribute("class", "photo-gallery-box");
-
-                        var rsrpgpgbi = document.createElement("img");
-                        storage.ref(`${rating.url}`).getDownloadURL().then(result => {
-                            rsrpgpgbi.src = result;
-                        }).catch(err => errorAlert(err));
-
-                        rsrpgpgb.appendChild(rsrpgpgbi);
-
-                        var rsrpgpgbd = document.createElement("div");
-                        rsrpgpgbd.setAttribute("class", "photo-gallery-box-testimony");
-                        
-                        var rsrpgpgbdR = document.createElement("p");
-                        rsrpgpgbdR.innerHTML = `User rated ${rating.rating}/5`;
-
-                        database.ref(`users/${rating.id}/name`).once('value')
-                        .then(snapshot => {
-                            var first = snapshot.val().first;
-                            rsrpgpgbdR.innerHTML = `${first} rated ${rating.rating}/5`;
-                        })
-
-                        rsrpgpgbd.appendChild(rsrpgpgbdR);
-
-                        rsrpgpgb.appendChild(rsrpgpgbd);
-
-                        rsrpg.appendChild(rsrpgpgb);
-                    }
-                }
-            }
 
             rsrp.appendChild(rsrpg);
 
