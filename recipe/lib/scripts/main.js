@@ -18,7 +18,7 @@ window.onclick = function() {
     if (event.target == errorBox) errorBox.style.display = "none";
 };
 
-document.querySelector(".error-content div").onclick = function() {
+document.querySelector(".error-content button").onclick = function() {
     document.querySelector(".error-box").style.display = "none";
 }
 
@@ -63,20 +63,19 @@ function newIngredientBox() {
     var i = document.createElement("input");
     i.setAttribute("type", "text");
 
-    var b = document.createElement("button");
-    b.innerHTML = "Remove Ingredient";
+    var b = document.createElement("div");
     b.onclick = function() {
         event.preventDefault();
         var parent = b.parentNode,
             grandparent = parent.parentNode;
 
-        // only if there is more than one ingredient box
-        var ingredInputs = document.querySelectorAll(".ingredient-query div input[type = text]");
-        if (ingredInputs.length > 1) grandparent.removeChild(parent);
-        else errorAlert("You must search with at least one ingredient.");
-    }
+        if (grandparent.children.length < 2) return errorAlert("You can't look up a recipe without at least one ingredient.");
+
+        grandparent.removeChild(parent);
+    };
 
     var d = document.createElement("div");
+    d.setAttribute("class", "ingredient-query-INGRED-BOX");
     d.appendChild(i);
     d.appendChild(b);
 
@@ -161,34 +160,45 @@ function displayMatches(recipeKeys, recipes) {
             i.src = result;
             THUMBNAIL_SRC = result;
         }).catch(err => errorAlert(err));
+        let imgContainer = document.createElement("div");
+        imgContainer.setAttribute("class", "results-recipe-box-img");
+        imgContainer.appendChild(i);
     
         let h1 = document.createElement("h1");
         h1.innerHTML = recipe.name;
-        let h2 = document.createElement("h2");
-        h2.innerHTML = recipe.description;
-        let h3 = document.createElement("h3");
-        h3.innerHTML = "Uploaded on " + (new Date(parseInt(recipe.date)).toDateString());
         let infoContainer = document.createElement("div");
         infoContainer.setAttribute("class", "results-recipe-box-info");
         infoContainer.appendChild(h1);
-        infoContainer.appendChild(h2);
-        infoContainer.appendChild(h3);
     
         function reviewPara(obj, type) {
-            let ratersKeys = Object.keys(obj.raters);
+            let raters = Object.values(obj.raters);
             let p = document.createElement("p");
-            p.innerHTML = `${type} [${ratersKeys.length - 1} rater${(ratersKeys.length - 1 == 0 || ratersKeys.length - 1 > 1) ? "s" : ""}]: ${(ratersKeys.length < 2) ? "N/A" : (obj.average)}`;
+            p.innerHTML = `${type} <abbr title='number of raters'>[${raters.length - 1}]</abbr>: ${(function() {
+                var AVG;
+                if (raters.length < 2) {
+                    AVG = "N/A";
+                } else if (raters.length >= 2) {
+                    for (var i=0, sum=0; i<raters.length; i++) {
+                        if (raters[i].id !== "NO_ID") sum+= parseInt(raters[i].rating);
+                    }
+                    var returnAVG = sum/(raters.length-1);
+                    AVG = `${(returnAVG.toString().length > 1) ? returnAVG.toFixed(1) : returnAVG}/5`;
+                }
+
+                return AVG;
+            })()}`;
     
             return p;
         }
     
         let reviewContainer = document.createElement("div");
-        reviewContainer.appendChild(reviewPara(recipe.reviews.community, "Community"));
-        reviewContainer.appendChild(reviewPara(recipe.reviews.photo, "Photo"));
+        reviewContainer.setAttribute("class", "results-recipe-box-rating");
+        reviewContainer.appendChild(reviewPara(recipe.reviews.community, "<abbr title='Community Rating'>CR</abbr>"));
+        reviewContainer.appendChild(reviewPara(recipe.reviews.photo, "<abbr title='Photo Rating'>PR</abbr>"));
     
         let rContainer = document.createElement("div");
         rContainer.setAttribute("class", "results-recipe-box");
-        rContainer.appendChild(i);
+        rContainer.appendChild(imgContainer);
         rContainer.appendChild(infoContainer);
         rContainer.appendChild(reviewContainer);
 
@@ -196,12 +206,26 @@ function displayMatches(recipeKeys, recipes) {
             var RECIPE_SUMMARY = document.querySelector(".recipe-summary");
             var childsToAppend = [];
 
+            window.location.href = "#submitBtn";
+
 
             // when user selects a recipe
-            document.querySelector(".search-form").style.display = "none";
             document.querySelector(".results-box").style.display = "none";
             RECIPE_SUMMARY.style.display = "block";
             RECIPE_SUMMARY.innerHTML = "";
+
+
+
+            // recipe-summary-thumbnail
+            var rst = document.createElement("div");
+            rst.setAttribute("class", "recipe-summary-thumbnail");
+
+            var rsti = document.createElement("img");
+            rsti.src = THUMBNAIL_SRC;
+
+            rst.appendChild(rsti);
+
+            childsToAppend.push(rst);
 
 
             // recipe-summary-head
@@ -214,7 +238,7 @@ function displayMatches(recipeKeys, recipes) {
 
             var rshd = document.createElement("h2");
             rshd.setAttribute("class", "recipe-summary-head-date");
-            rshd.innerHTML = "Uploaded on " + (new Date(parseInt(recipe.date)).toDateString()) + " by User";
+            rshd.innerHTML = "Uploaded by User";
             firebase.database().ref(`users/${recipe.user}`).once('value')
             .then(snapshot => {
                 var info = rshd.innerHTML.split(" ");
@@ -229,22 +253,10 @@ function displayMatches(recipeKeys, recipes) {
             rshp.innerHTML = recipe.description;
 
             rsh.appendChild(rsht);
-            rsh.appendChild(rshd);
+            rsh.appendChild(rshd); 
             rsh.appendChild(rshp);
 
             childsToAppend.push(rsh);
-
-
-            // recipe-summary-thumbnail
-            var rst = document.createElement("div");
-            rst.setAttribute("class", "recipe-summary-thumbnail");
-
-            var rsti = document.createElement("img");
-            rsti.src = THUMBNAIL_SRC;
-
-            rst.appendChild(rsti);
-
-            childsToAppend.push(rst);
 
 
             // recipe-summary-ingredients
@@ -300,15 +312,6 @@ function displayMatches(recipeKeys, recipes) {
                 sc.appendChild(sch);
                 sc.appendChild(scp);
 
-                if (steps[i].url !== "NO_URL") {
-                    var scim = document.createElement("img");
-                    storage.ref(`${steps[i].url}`).getDownloadURL().then(result => {
-                        scim.src = result;
-                    }).catch(err => errorAlert(err));
-
-                    sc.appendChild(scim);
-                }
-
                 rsin.appendChild(sc);
             }
 
@@ -346,7 +349,8 @@ function displayMatches(recipeKeys, recipes) {
                 for (var i=0, sum=0; i<raters.length; i++) {
                     if (raters[i].id !== "NO_ID") sum+= parseInt(raters[i].rating);
                 }
-                rsrpR.innerHTML = `Average Rating: ${(sum/(raters.length-1)).toFixed(1)}`;
+                var rsrpRAVERAGE = sum/(raters.length-1);
+                rsrpR.innerHTML = `Average Rating: ${(rsrpRAVERAGE.toString().length > 1) ? rsrpRAVERAGE.toFixed(1) : rsrpRAVERAGE}/5`;
                 rsrpL.innerHTML = `There ${(raters.length-1 == 0 || raters.length-1 > 1) ? "are" : "is"} currently ${raters.length - 1} community rater${(raters.length-1 == 1) ? "" : "s"} on this recipe.`;
             }
 
@@ -366,18 +370,15 @@ function displayMatches(recipeKeys, recipes) {
                     var raters = Object.values(snapshot.val());
                     if (raters.filter(rater => rater.id == auth.getUid()).length < 1) {
                         // no review from the user
-                        var rsrcph = document.createElement("h1");
-                        rsrcph.innerHTML = "Give your own community rating for this recipe!";
+                        var rsrcph = document.createElement("p");
+                        rsrcph.innerHTML = "Click to Give a Community Rating";
                         rsrcp.appendChild(rsrcph);
-        
-                        var rsrcpb = document.createElement("button");
-                        rsrcpb.innerHTML = "Give my community review";
         
                         var rsrcpForm = document.createElement("form");
         
                         var ratingBox = document.createElement("div");
                         var ratingBoxH = document.createElement("h1");
-                        ratingBoxH.innerHTML = "Rating out of 5 stars";
+                        ratingBoxH.innerHTML = "Rate it out of 5 Stars";
                         ratingBox.appendChild(ratingBoxH);
         
                         var ratingBoxS = document.createElement("select");
@@ -394,7 +395,7 @@ function displayMatches(recipeKeys, recipes) {
                         rsrcpForm.style.display = "none";
         
                         var comReSubmitBTN = document.createElement("button");
-                        comReSubmitBTN.innerHTML = "Submit Community Review";
+                        comReSubmitBTN.innerHTML = "Submit Rating";
                         comReSubmitBTN.onclick = function() {
                             event.preventDefault();
                             var COMMUNITY_RATING = ratingBoxS.value;
@@ -416,26 +417,31 @@ function displayMatches(recipeKeys, recipes) {
                             for (var i=0, sum=0; i<raters.length; i++) {
                                 if (raters[i].id !== "NO_ID") sum+= parseInt(raters[i].rating);
                             }
-                            rsrpR.innerHTML = `Average Rating: ${(sum/(raters.length-1)).toFixed(1)}`;
+                            
+                            var rsrpRAVERAGE = sum/(raters.length-1);
+                            rsrpR.innerHTML = `Average Rating: ${(rsrpRAVERAGE.toString().length > 1) ? rsrpRAVERAGE.toFixed(1) : rsrpRAVERAGE}/5`;
                             rsrpL.innerHTML = `There ${(raters.length-1 == 0 || raters.length-1 > 1) ? "are" : "is"} currently ${raters.length - 1} community rater${(raters.length-1 == 1) ? "" : "s"} on this recipe.`;
                             
                             var rsrcpFormCONFIRM = document.createElement("p");
-                            rsrcpFormCONFIRM.innerHTML = "Thank you for your review";
+                            rsrcpFormCONFIRM.innerHTML = "Thank you for your review!";
                             rsrcpForm.innerHTML = "";
                             rsrcpForm.appendChild(rsrcpFormCONFIRM);
                         }
                         rsrcpForm.appendChild(comReSubmitBTN);
         
-                        rsrcpb.onclick = function() {
+                        rsrcp.style.cursor = "pointer";
+                        rsrcp.onclick = function() {
                             rsrcpForm.style.display = "block";
-                            rsrcpb.style.display = "none";
+                            rsrcph.style.display = "none";
+
+                            rsrcp.style.cursor = "auto";
+                            rsrcp.setAttribute("onclick", "javascript:void(0)");
                         }
-                        rsrcp.appendChild(rsrcpb);
         
                         rsrcp.appendChild(rsrcpForm);
                     } else {
                         var ALREADY_RATED_P = document.createElement("p");
-                        ALREADY_RATED_P.innerHTML = "You have already gave a community review to this recipe."
+                        ALREADY_RATED_P.innerHTML = "You have already given a community review to this recipe."
 
                         rsrcp.appendChild(ALREADY_RATED_P);
                     } 
@@ -450,9 +456,14 @@ function displayMatches(recipeKeys, recipes) {
                     }
                 })
             } else {
-                var rsrcpa = document.createElement("a");
-                rsrcpa.setAttribute("href", "../login/index.html");
-                rsrcpa.innerHTML = "Go Login To Leave a Review";
+                var rsrcpa = document.createElement("p");
+                rsrcpa.innerHTML = "Click to go Login to Leave a Review";
+
+                rsrcp.style.cursor = "pointer";
+                rsrcp.onclick = function () {
+                    rsrcp.style.cursor = "auto";
+                    window.location.href = "../index.html";
+                }
 
                 rsrcp.appendChild(rsrcpa);
             }
@@ -460,8 +471,6 @@ function displayMatches(recipeKeys, recipes) {
             rsrc.appendChild(rsrcp);
 
             rsr.appendChild(rsrc); // add community review section
-
-
 
             // recipe-summary-review-photo
             var rsrp = document.createElement("div");
@@ -489,7 +498,9 @@ function displayMatches(recipeKeys, recipes) {
                 for (var i=0, SUM=0; i<RATERS.length; i++) {
                     if (RATERS[i].id !== "NO_ID") SUM+= parseInt(RATERS[i].rating);
                 }
-                rsrpsR.innerHTML = `Photo Rating: ${(SUM/(RATERS.length-1)).toFixed(1)}`;
+                
+                var rsrpRAVERAGE = sum/(raters.length-1);
+                rsrpsR.innerHTML = `Average Rating: ${(rsrpRAVERAGE.toString().length > 1) ? rsrpRAVERAGE.toFixed(1) : rsrpRAVERAGE}/5`;
                 rsrpsL.innerHTML = `There ${(RATERS.length-1 == 0 || RATERS.length-1 > 1) ? "are" : "is"} currently ${RATERS.length - 1} photo rater${(RATERS.length-1 == 1) ? "" : "s"} on this recipe.`;
             }
 
@@ -509,18 +520,15 @@ function displayMatches(recipeKeys, recipes) {
                     var raters = Object.values(snapshot.val());
                     if (raters.filter(rater => rater.id == auth.getUid()).length < 1) {
                         // no review from the user
-                        var rsrpph = document.createElement("h1");
-                        rsrpph.innerHTML = "Give your own photo rating for this recipe!";
+                        var rsrpph = document.createElement("p");
+                        rsrpph.innerHTML = "Click to Give a Photo Rating";
                         rsrpp.appendChild(rsrpph);
-        
-                        var rsrppb = document.createElement("button");
-                        rsrppb.innerHTML = "Give my photo review";
         
                         var rsrppForm = document.createElement("form");
         
                         var ratingBox = document.createElement("div");
                         var ratingBoxH = document.createElement("h1");
-                        ratingBoxH.innerHTML = "Rating out of 5 stars";
+                        ratingBoxH.innerHTML = "Rate it out of 5 Stars";
                         ratingBox.appendChild(ratingBoxH);
         
                         var ratingBoxS = document.createElement("select");
@@ -538,7 +546,7 @@ function displayMatches(recipeKeys, recipes) {
 
                         var ratingPhoto = document.createElement("div");
                         var ratingPhotoH = document.createElement("h1");
-                        ratingPhotoH.innerHTML = "Attach A Photo Of the Meal You Made with the Recipe";
+                        ratingPhotoH.innerHTML = "Picture Of the Meal";
                         ratingPhoto.appendChild(ratingPhotoH);
 
                         var ratingPhotoI = document.createElement("input");
@@ -551,11 +559,6 @@ function displayMatches(recipeKeys, recipes) {
                         var ratingReasonH = document.createElement("h1");
                         ratingReasonH.innerHTML = "Reason for Review";
                         ratingReason.appendChild(ratingReasonH);
-
-                        var ratingReasonI = document.createElement("input");
-                        ratingReasonI.setAttribute("type", "text");
-                        ratingReason.appendChild(ratingReasonI);
-                        rsrppForm.appendChild(ratingReason);
 
                         var comReSubmitBTN = document.createElement("button");
                         comReSubmitBTN.innerHTML = "Submit Photo Review";
@@ -570,10 +573,8 @@ function displayMatches(recipeKeys, recipes) {
                             });
 
                             var photoFile = ratingPhotoI.files[0];
-                            var photoWritten = ratingReasonI.value.trim();
 
                             if (!photoFile) return errorAlert("You must attach a photo for a photo review.");
-                            if (photoWritten.length == 0) return errorAlert("You must write a reason for a photo review.");
 
                             var photoUrl = `images/${RECIPE_ID}/${auth.getUid()}/${photoFile.name}`;
                             storage.ref().child(photoUrl).put(photoFile)
@@ -585,7 +586,6 @@ function displayMatches(recipeKeys, recipes) {
                             var UPDATE = {
                                 id: auth.getUid(),
                                 rating: PHOTO_RATING,
-                                written: (ratingReasonI.value.trim()),
                                 url: `images/${RECIPE_ID}/${auth.getUid()}/${photoFile.name}`
                             };
                             database.ref(`recipes/${RECIPE_ID}/reviews/photo/raters`).push(
@@ -596,26 +596,30 @@ function displayMatches(recipeKeys, recipes) {
                             for (var i=0, sum=0; i<RATERS.length; i++) {
                                 if (RATERS[i].id !== "NO_ID") sum+= parseInt(RATERS[i].rating);
                             }
-                            rsrpsR.innerHTML = `Photo Rating: ${(sum/(RATERS.length-1)).toFixed(1)}`;
+                            
+                            var rsrpRAVERAGE = sum/(RATERS.length-1);
+                            rsrpsR.innerHTML = `Average Rating: ${(rsrpRAVERAGE.toString().length > 1) ? rsrpRAVERAGE.toFixed(1) : rsrpRAVERAGE}/5`;
                             rsrpsL.innerHTML = `There ${(RATERS.length-1 == 0 || RATERS.length-1 > 1) ? "are" : "is"} currently ${RATERS.length - 1} photo rater${(RATERS.length-1 == 1) ? "" : "s"} on this recipe.`;
 
                             var rsrppFormCONFIRM = document.createElement("p");
-                            rsrppFormCONFIRM.innerHTML = "Thank you for your review";
+                            rsrppFormCONFIRM.innerHTML = "Thank you for your review!";
                             rsrppForm.innerHTML = "";
                             rsrppForm.appendChild(rsrppFormCONFIRM);
                         }
                         rsrppForm.appendChild(comReSubmitBTN);
         
-                        rsrppb.onclick = function() {
+                        rsrpp.style.cursor = "pointer";
+                        rsrpp.onclick = function() {
                             rsrppForm.style.display = "block";
-                            rsrppb.style.display = "none";
+                            rsrpph.style.display = "none";
+
+                            rsrpp.style.cursor = "auto";
                         }
-                        rsrpp.appendChild(rsrppb);
         
                         rsrpp.appendChild(rsrppForm);
                     } else {
                         var ALREADY_RATED_P = document.createElement("p");
-                        ALREADY_RATED_P.innerHTML = "You have already gave a community review to this recipe."
+                        ALREADY_RATED_P.innerHTML = "You have already given a photo review to this recipe."
 
                         rsrpp.appendChild(ALREADY_RATED_P);
                     } 
@@ -630,9 +634,14 @@ function displayMatches(recipeKeys, recipes) {
                     }
                 })
             } else {
-                var rsrppa = document.createElement("a");
-                rsrppa.setAttribute("href", "../login/index.html");
-                rsrppa.innerHTML = "Go Login To Leave a Review";
+                var rsrppa = document.createElement("p");
+                rsrppa.innerHTML = "Click to go Login to Leave a Review";
+
+                rsrpp.style.cursor = "pointer";
+                rsrpp.onclick = function () {
+                    rsrpp.style.cursor = "auto";
+                    window.location.href = "../index.html";
+                }
 
                 rsrpp.appendChild(rsrppa);
             }
@@ -668,20 +677,15 @@ function displayMatches(recipeKeys, recipes) {
                         rsrpgpgbd.setAttribute("class", "photo-gallery-box-testimony");
                         
                         var rsrpgpgbdR = document.createElement("p");
-                        rsrpgpgbdR.innerHTML = `Rated ${rating.rating} out of 5 Stars`;
+                        rsrpgpgbdR.innerHTML = `User rated ${rating.rating}/5`;
 
-                        var rsrpgpgbdRe = document.createElement("p");
-                        rsrpgpgbdRe.innerHTML = `"${rating.written}" - User`;
-
-                        database.ref(`users/${rating.id}`).once("value")
+                        database.ref(`users/${rating.id}/name`).once('value')
                         .then(snapshot => {
-                            var user = snapshot.val();
-                            rsrpgpgbdRe.innerHTML = `"${rating.written}" - ${user.name.first} ${user.name.last}`;
+                            var first = snapshot.val().first;
+                            rsrpgpgbdR.innerHTML = `${first} rated ${rating.rating}/5`;
                         })
-                        .catch(err => { if (err) errorAlert(err) });
 
                         rsrpgpgbd.appendChild(rsrpgpgbdR);
-                        rsrpgpgbd.appendChild(rsrpgpgbdRe);
 
                         rsrpgpgb.appendChild(rsrpgpgbd);
 

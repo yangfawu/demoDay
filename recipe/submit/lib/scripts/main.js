@@ -100,11 +100,11 @@ function loadForm() {
                 } else if (this.value.filter(prog => prog == "p").length < 1) {
                     // if all values are "c", then upload is complete
                     document.querySelector(".status p").innerHTML = "Upload Complete!";
-                    document.querySelector(".status div").style.display = "block";
+                    document.querySelector(".status section").style.display = "flex";
                 }
             }
         };
-        for (var i=0; i<(4 + (ingredientsInputs.length/2)); i++)
+        for (var i=0; i<(5 + (ingredientsInputs.length/2) + stepTextsInputs.length); i++)
             PROGRESS.value.push("p");
 
         var recipeId = database.ref("recipes/").push().key;
@@ -155,7 +155,18 @@ function loadForm() {
                         PROGRESS.log(3, "f");
                     } else PROGRESS.log(3, "c");
                 });
-
+                if (thumbnail) {
+                    storage.ref().child(`images/${recipeId}/${thumbnail.name}`).put(thumbnail)
+                    .then(() => {
+                        PROGRESS.log(4, "c");
+                    })
+                    .catch(err => {
+                        if (err) {
+                            errorAlert(err);
+                            PROGRESS.log(4, "f");
+                        }
+                    })
+                } else PROGRESS.log(4, "c");
 
                 // upload ingredients
                 for (var i=0; i<(ingredientsInputs.length/2); i++) {
@@ -169,7 +180,7 @@ function loadForm() {
                                 PROGRESS.log((idx/2) + offset, "f");
                             } else PROGRESS.log((idx/2) + offset, "c");
                         });
-                    })(i*2, 4);
+                    })(i*2, 5);
                 }
                 
                 // upload instructions
@@ -184,7 +195,7 @@ function loadForm() {
                                 PROGRESS.log(idx + offset, "f");
                             } else PROGRESS.log(idx + offset, "c");
                         });
-                    })(j, 4 + (ingredientsInputs.length/2));
+                    })(j, 5 + (ingredientsInputs.length/2));
                 }
             }
         });
